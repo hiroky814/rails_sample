@@ -1,3 +1,6 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  get '/' => 'user#index'
+  get '/user' => 'user#index'
+  get '/user/search' => 'user#read'
+  get '/user/regist' => 'user#create'
 end

@@ -1,13 +1,31 @@
 version: '3'
 services:
   db:
-    image: postgres
+    build: ./docker/mysql
+    ports:
+      - 3306:3306
+    hostname: db
+    volumes:
+      - ./sample/db:/var/lib/mysql
+    environment:
+      TZ: Asia/Tokyo
+      MYSQL_DATABASE: sample
+      MYSQL_ROOT_PASSWORD: password
   web:
     build: .
-    command: bundle exec rails s -p 3000 -b '0.0.0.0'
+    command: bundle exec unicorn -c config/unicorn.rb -E development -l 3000
     volumes:
-      - .:/myapp
+      - .:/opt/application/current
     ports:
       - "3000:3000"
-    depends_on:
+    environment:
+      TZ: Asia/Tokyo
+      RAILS_ENV: 'development'
+      RACK_ENV: 'development'
+      DB_HOST: 'db'
+      DB_PORT: '3306'
+      DB_USER: 'root'
+      DB_PASSWORD: 'password'
+      DB_NAME: 'sample'
+    links:
       - db
