@@ -1,4 +1,5 @@
 class UserController < ApplicationController
-  def create
+  def read
+    
   end
 end
