@@ -5,3 +5,16 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+require 'csv'
+
+# user
+records = []
+CSV.foreach('db/user.csv') do |row|
+  records << User.new(
+		name: row[0],
+		age: row[1],
+		graduate: row[2],
+		hobby: row[3]
+	)
+end
+User.import records
