@@ -1,4 +1,8 @@
 class UserController < ApplicationController
+  def index
+    @user_list = []
+  end
+
   def read
     @name = params[:name]
     @user_list = []
@@ -7,5 +11,6 @@ class UserController < ApplicationController
     else
       @user_list = User.where("name like '%" + @name + "%'")
     end
+    render "index"
   end
 end
