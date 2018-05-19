@@ -48,6 +48,7 @@ group :development do
   gem 'brakeman'
   gem 'rails_best_practices'
   gem 'rspec'
+  gem 'rspec-rails'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

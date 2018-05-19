@@ -156,6 +156,14 @@ GEM
     rspec-mocks (3.7.0)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.7.0)
+    rspec-rails (3.7.2)
+      actionpack (>= 3.0)
+      activesupport (>= 3.0)
+      railties (>= 3.0)
+      rspec-core (~> 3.7.0)
+      rspec-expectations (~> 3.7.0)
+      rspec-mocks (~> 3.7.0)
+      rspec-support (~> 3.7.0)
     rspec-support (3.7.1)
     rubocop (0.55.0)
       parallel (~> 1.10)
@@ -238,6 +246,7 @@ DEPENDENCIES
   rails (~> 5.2.0)
   rails_best_practices
   rspec
+  rspec-rails
   rubocop
   sass-rails (~> 5.0.7)
   spring
