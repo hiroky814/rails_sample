@@ -64,7 +64,7 @@ jobs:
           name: Test
           command: bundle exec rspec
 
-#      - run:
+      - run:
           name: Post Coverage to CodeClimate
           command: bundle exec codeclimate-test-reporter
           
