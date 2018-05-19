@@ -14,7 +14,7 @@ jobs:
           - DB_NAME: 'sample'
           - RAILS_ENV: 'test'
           - RACK_ENV: 'test'
-#          - CODECLIMATE_REPO_TOKEN: 4ad48e996f1f2fdc50e4e7ad95801e10d8bbbc9df75b0188767fdc7b806c28ff
+          - CODECLIMATE_REPO_TOKEN: 78b17f1c3557921b638626294fbf42d54764a0097e44a4314f96df61127dcb2a
       - image: circleci/mysql:5.7.22
         environment:
           - TZ: Asia/Tokyo
@@ -65,5 +65,6 @@ jobs:
           command: bundle exec rspec
 
 #      - run:
- #         name: Post Coverage to CodeClimate
-  #        command: bundle exec codeclimate-test-reporter
+          name: Post Coverage to CodeClimate
+          command: bundle exec codeclimate-test-reporter
+          
