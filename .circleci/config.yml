@@ -1,0 +1,69 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: ruby:2.5.1
+        ports:
+          - "3000:3000"
+        environment:
+          - TZ: Asia/Tokyo
+          - DB_HOST: '127.0.0.1'
+          - DB_PORT: '3306'
+          - DB_USER: 'root'
+          - DB_PASSWORD: 'password'
+          - DB_NAME: 'sample'
+          - RAILS_ENV: 'test'
+          - RACK_ENV: 'test'
+#          - CODECLIMATE_REPO_TOKEN: 4ad48e996f1f2fdc50e4e7ad95801e10d8bbbc9df75b0188767fdc7b806c28ff
+      - image: circleci/mysql:5.7.22
+        environment:
+          - TZ: Asia/Tokyo
+          - MYSQL_DATABASE: sample
+          - MYSQL_ROOT_PASSWORD: password
+        ports:
+          - 3306:3306
+
+    working_directory: ~/sample_rails
+    steps:
+      - checkout
+
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "Gemfile.lock" }}
+          # fallback to using the latest cache if no exact match is found
+          - v1-dependencies-
+
+      # ライブラリの追加
+      - run: 
+          name: Install libraries
+          command: |
+            curl -sL https://deb.nodesource.com/setup_8.x | bash - && \
+            apt-get update && \
+            apt-get install -y  --no-install-recommends \
+            nodejs build-essential libpq-dev postgresql-client apt-transport-https libopencv-dev && \
+            rm -rf /var/lib/apt/lists/*
+                      
+      - run:
+          name: Install bundle
+          command: bundle install -j 4 --path vendor/bundle
+      
+      - save_cache:
+          paths:
+            - ./vendor/bundle
+          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+
+      - run:
+          name: Init DB
+          command: |
+            bundle exec rake db:drop
+            bundle exec rake db:create
+            bundle exec rake db:migrate RAILS_ENV=test
+            bundle exec rake db:seed RAILS_ENV=test
+
+      - run:
+          name: Test
+          command: bundle exec rspec
+
+#      - run:
+ #         name: Post Coverage to CodeClimate
+  #        command: bundle exec codeclimate-test-reporter
