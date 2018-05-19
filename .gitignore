@@ -19,4 +19,7 @@
 .byebug_history
 
 # db strage
-/sample/db/
+/sample/db
+/sample/db/*
+
+/coverage
