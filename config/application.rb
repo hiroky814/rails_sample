@@ -16,6 +16,5 @@ module FLEETAC
     config.time_zone = 'Tokyo'
     config.active_record.default_timezone = :local 
     
-    config.assets.paths << config.root.join('node_modules')
   end
 end

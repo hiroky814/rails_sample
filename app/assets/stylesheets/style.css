@@ -1,3 +1,14 @@
 .body-layout {
     padding-top: 70px;
 }
+
+.picFlame {
+    border: solid 2px red;
+    background-color: black;
+}
+
+.picFlame2 {
+    height: 100px;;
+    border: solid 2px red;
+    background-color: black;
+}
