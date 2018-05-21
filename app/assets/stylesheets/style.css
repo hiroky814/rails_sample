@@ -7,3 +7,8 @@
     background-color: black;
     text-align: center;
 }
+
+.showTime {
+    font-size: 30px;
+    font-weight: 600;
+}
