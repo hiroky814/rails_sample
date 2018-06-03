@@ -1,0 +1,76 @@
+<div class="container">
+  <h1 class="h1">chartjs自動更新</h1>
+  <br><br>
+  <div class="row">
+    <div class="col-lg-2">
+      <button id="start" type="button" class="btn btn-block btn-info">自動更新開始</button>
+    </div>
+	</div>
+  <br><br>
+
+  <div class="col-lg-10">
+    <canvas id="myChart"></canvas>
+  </div>
+</div>
+
+<script>
+  var ctx = document.getElementById("myChart").getContext('2d');
+  var myChart;
+  var datas = [[1, 2, 3], [10, 50, 30]];
+  var cnt = 3
+  var timer;
+
+$(function(){
+    clearActive();
+    setActive("menuChartJS");
+    setChartJs();
+    setClickEvent();
+  });
+
+  function setClickEvent() {
+    $('#start').on('click', function() {
+      timer = setInterval("addData()", 3000);
+    });
+  }
+
+  function setChartJs() {
+    myChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: datas[0],
+        datasets: [{
+          borderColor: "rgba(0,0,255,1)",
+          data: datas[1],
+          borderWidth: 3,
+          fill: false
+        }]
+      },
+      options: {
+        elements: {
+          line: {
+            tension: 0,
+          }
+        }
+      }
+    });
+    console.log(myChart);
+  }
+  
+  function addData() {
+    cnt = cnt + 1;
+    myChart.data.labels.push(cnt);
+    myChart.data.datasets.forEach((dataset) => {
+      dataset.data.push(Math.floor( Math.random() * 100 ));
+    });
+    if (cnt == 7) {
+    myChart.data.datasets.forEach((dataset) => {
+      dataset.borderColor = "rgba(230,10,10,1)"
+    });
+    }
+    myChart.update();
+    if (cnt == 7) {
+      clearInterval(timer);
+    }
+  }
+
+</script>

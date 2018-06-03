@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   get '/search' => 'user#read'
   get '/picture' => 'picture#index'
   get '/regular_update' => 'regular_update#index'
+  get '/chartjs' => 'chartjs#index'
 
   namespace :api do
     namespace :v1 do
