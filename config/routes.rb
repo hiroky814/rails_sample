@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :users
   get '/' => 'user#index'
   get '/add_user' => 'add_user#index'
   post '/add_user/add' => 'add_user#create'
