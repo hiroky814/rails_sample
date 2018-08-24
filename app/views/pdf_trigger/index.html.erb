@@ -1,0 +1,38 @@
+<div class="container">
+	<h1 class="h1">PDF表示</h1>
+	<br><br>
+	<div class="row">
+		<div class="col-lg-5">
+			<button id="pdf" class="btn btn-block btn-info">PDFを別タブで表示</button>
+
+			<!--
+			<input type="button"  value="PDFを別タブで表示" onClick="window.open('/pdf_show','_blank')" />
+			-->
+		</div>
+	</div>
+</div>
+
+<script>
+	$(function(){
+	  clearActive();
+	  setActive("showPdf");
+	});
+
+	$('#pdf').on('click', function() {
+		$.ajax({
+			url: '/api/v1/pdf_url',
+			type: 'GET',
+			data: {
+				"diag": ''
+			},
+			dataType: 'json',
+			success: function(data) {
+				var win = window.open(data['url'], '_blank');
+			},
+			error: function() {
+				alert('ajax失敗');
+			}
+		});
+});
+
+</script>

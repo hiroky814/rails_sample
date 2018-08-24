@@ -1,0 +1,2 @@
+module PdfTriggerHelper
+end

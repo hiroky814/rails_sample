@@ -18,6 +18,9 @@ gem 'activestorage', '~> 5.2.0'
 gem 'activesupport', '~> 5.2.0'
 gem 'mysql2', '~> 0.4.4'
 
+# aws-sdk
+gem 'aws-sdk'
+
 # activerecord
 gem 'activerecord-import'
 

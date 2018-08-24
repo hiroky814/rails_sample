@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   get '/' => 'user#index'
   get '/add_user' => 'add_user#index'
   post '/add_user/add' => 'add_user#create'
@@ -6,10 +7,14 @@ Rails.application.routes.draw do
   get '/picture' => 'picture#index'
   get '/regular_update' => 'regular_update#index'
   get '/chartjs' => 'chartjs#index'
+  get '/pdf_trigger' => 'pdf_trigger#index'
 
   namespace :api do
     namespace :v1 do
       namespace :server_time do
+        get '/', action: 'read'
+      end
+      namespace :pdf_url do
         get '/', action: 'read'
       end
     end
