@@ -27,5 +27,9 @@ services:
       DB_USER: 'root'
       DB_PASSWORD: 'password'
       DB_NAME: 'sample'
+      REGION: ${REGION}
+      BUCKET_NAME: ${BUCKET_NAME}
+      OBJECT_KEY: ${OBJECT_KEY}
+      EXPIRE_TIME: ${EXPIRE_TIME}
     links:
       - db

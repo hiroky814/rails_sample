@@ -8,13 +8,11 @@ Rails.application.routes.draw do
   get '/regular_update' => 'regular_update#index'
   get '/chartjs' => 'chartjs#index'
   get '/pdf_trigger' => 'pdf_trigger#index'
+  get '/pdf_show' => 'pdf_show#read'
 
   namespace :api do
     namespace :v1 do
       namespace :server_time do
-        get '/', action: 'read'
-      end
-      namespace :pdf_url do
         get '/', action: 'read'
       end
     end
