@@ -31,5 +31,7 @@ services:
       BUCKET_NAME: ${BUCKET_NAME}
       OBJECT_KEY: ${OBJECT_KEY}
       EXPIRE_TIME: ${EXPIRE_TIME}
+      ACCESS_KEY: ${ACCESS_KEY}
+      SECRET_KEY: ${SECRET_KEY}
     links:
       - db
