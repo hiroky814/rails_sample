@@ -34,7 +34,7 @@ jobs:
           - v1-dependencies-
 
       # ライブラリの追加
-      - run: 
+      - run:
           name: Install libraries
           command: |
             curl -sL https://deb.nodesource.com/setup_8.x | bash - && \
@@ -42,15 +42,19 @@ jobs:
             apt-get install -y  --no-install-recommends \
             nodejs build-essential libpq-dev postgresql-client apt-transport-https libopencv-dev && \
             rm -rf /var/lib/apt/lists/*
-                      
+
       - run:
           name: Install bundle
           command: bundle install -j 4 --path vendor/bundle
-      
+
       - save_cache:
           paths:
             - ./vendor/bundle
           key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+
+      - run:
+          name: rubocop
+          command: rubocop
 
       - run:
           name: Init DB
@@ -67,4 +71,3 @@ jobs:
       - run:
           name: Post Coverage to CodeClimate
           command: bundle exec codeclimate-test-reporter
-          
