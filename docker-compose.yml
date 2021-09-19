@@ -1,37 +1,39 @@
-version: '3'
+version: "3"
 services:
   db:
     build: ./docker/mysql
     ports:
       - 3306:3306
     hostname: db
+    command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci --skip-character-set-client-handshake
     volumes:
-      - ./sample/db:/var/lib/mysql
+      - ./data/db:/var/lib/mysql
     environment:
       TZ: Asia/Tokyo
-      MYSQL_DATABASE: sample
+      MYSQL_DATABASE: sample_db
       MYSQL_ROOT_PASSWORD: password
   web:
     build: .
-    command: bundle exec unicorn -c config/unicorn.rb -E production -l 3000
     volumes:
       - .:/opt/application/current
+      - ./public/pdf:/opt/application/current/public/pdf
+      - /opt/application/current/node_modules
     ports:
       - "3000:3000"
     environment:
       TZ: Asia/Tokyo
-      RAILS_ENV: 'production'
-      RACK_ENV: 'production'
-      DB_HOST: 'db'
-      DB_PORT: '3306'
-      DB_USER: 'root'
-      DB_PASSWORD: 'password'
-      DB_NAME: 'sample'
-      REGION: ${REGION}
-      BUCKET_NAME: ${BUCKET_NAME}
-      OBJECT_KEY: ${OBJECT_KEY}
-      EXPIRE_TIME: ${EXPIRE_TIME}
-      ACCESS_KEY: ${ACCESS_KEY}
-      SECRET_KEY: ${SECRET_KEY}
-    links:
-      - db
+      RAILS_ENV: "development"
+      RACK_ENV: "development"
+      DB_HOST: "db"
+      DB_PORT: "3306"
+      DB_USER: "root"
+      DB_PASSWORD: "password"
+      DB_NAME: "sample_db"
+      WEB_DOMAIN: ${WEB_DOMAIN:-invalid}
+      EMAIL_DOMAIN: ${EMAIL_DOMAIN:-invalid}
+      EMAIL_SERVER: ${EMAIL_SERVER:-invalid}
+      EMAIL_ADDRESS: ${EMAIL_ADDRESS:-invalid}
+      EMAIL_USER: ${EMAIL_USER:-invalid}
+      EMAIL_PASSWORD: ${EMAIL_PASSWORD:-invalid}
+    depends_on:
+      - "db"

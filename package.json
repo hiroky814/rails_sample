@@ -1,0 +1,7 @@
+{
+  "name": "web",
+  "private": true,
+  "dependencies": {
+    "admin-lte": "3.0.0-beta.1"
+  }
+}

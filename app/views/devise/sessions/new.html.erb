@@ -1,0 +1,55 @@
+<% content_for :title do %>
+  ログイン
+<% end %>
+
+
+<div class="wrapper">
+  <!-- Content Wrapper. Contains page content -->
+  <div class="container-fluid">
+    <div class="content">
+      <div class="login-box">
+        <div class="login-logo">
+          <h2>MMSサポート</h2>
+        </div>
+        <br>
+        <% if alert %>
+          <p class="alert alert-error"><%= alert %></p>
+        <% end %>
+        <div class="card">
+          <div class="my-card-title">
+            <h4>ログイン</h4>
+          </div>
+          <div class="card-body login-box-body">
+            <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+              <div class="field form-group">
+                <%= f.label :user_id,"ID", class: "label" %><br>
+                <%= f.number_field :user_id, autofocus: true, autocomplete: "user_id", class: "form-control", required: true %>
+              </div>
+              <div class="field form-group">
+                <%= f.label :password, "パスワード", class: "label" %><br>
+                <%= f.password_field :password, autocomplete: "current-password", class: "form-control", required: true %>
+              </div>
+              <br>
+              <div class="actions">
+                <%= f.submit "ログイン", class: "btn btn-primary" %>
+                <% if devise_mapping.rememberable? %>
+                  <span class="field ml-3">
+                    <%= f.check_box :remember_me %>
+                    <%= f.label "保存する" %>
+                  </span>
+                <% end %>
+              </div>
+            <% end %>
+            <br>
+            <%= link_to 'アイサンテクノロジーHP', 'https://www.aisantec.co.jp/', target: :_blank %><br>
+            <%= link_to '三菱電機株式会社HP', 'https://www.mitsubishielectric.co.jp/', target: :_blank %><br>
+            <%= link_to 'whatmms', 'http://www.whatmms.com/', target: :_blank %><br>
+            <%= link_to 'MMS研究会', 'http://www.whatmms.com/mms-config', target: :_blank %><br>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /.container-fluid -->
+</div>
+<!-- /.wrapper-->

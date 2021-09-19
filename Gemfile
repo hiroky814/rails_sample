@@ -1,59 +1,86 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
+git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?('/')
   "https://github.com/#{repo_name}.git"
 end
 
+# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
+gem 'rails', '~> 6.1.4.1'
+# Use mysql as the database for Active Record
+gem 'mysql2'
+# Use unicorn as the app server
 gem 'unicorn'
-gem 'rails', '~> 5.2.0'
-gem 'actioncable', '~> 5.2.0'
-gem 'actionmailer', '~> 5.2.0'
-gem 'actionpack', '~> 5.2.0'
-gem 'actionview', '~> 5.2.0'
-gem 'activejob', '~> 5.2.0'
-gem 'activemodel', '~> 5.2.0'
-gem 'activerecord', '~> 5.2.0'
-gem 'activestorage', '~> 5.2.0'
-gem 'activesupport', '~> 5.2.0'
-gem 'mysql2', '~> 0.4.4'
-
-# aws-sdk
-gem 'aws-sdk'
-
-# activerecord
-gem 'activerecord-import'
-
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 5.0.7'
+gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
-# Use CoffeeScript for .coffee assets and views
-gem 'coffee-rails', '~> 4.2'
+# See https://github.com/rails/execjs#readme for more supported runtimes
+# gem 'mini_racer', platforms: :ruby
+
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
 
+# Reduces boot times through caching; required in config/boot.rb
+gem 'bootsnap', '>= 1.1.0', require: false
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platform: :mri
-  gem 'rspec'
-  gem 'codeclimate-test-reporter'
-  gem 'simplecov'
+  gem 'byebug', platforms: %i[mri mingw x64_mingw]
 end
 
 group :development do
-  # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
-  gem 'web-console'
-  gem 'listen', '~> 3.0.5'
+  # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
+  gem 'listen', '>= 3.0.5', '< 3.2'
+  gem 'web-console', '>= 3.3.0'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+  gem 'brakeman'
+  gem 'letter_opener'
+  gem 'letter_opener_web'
+  gem 'rails_best_practices'
+  gem 'rubocop'
+  gem 'rubocop-rspec'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
-  gem 'rubocop'
-  gem 'brakeman'
-  gem 'rails_best_practices'
+end
+
+group :development, :test do
+  # unit test
   gem 'rspec'
   gem 'rspec-rails'
+  # create test data
+  gem 'factory_bot_rails'
+  # test coverage
+  gem 'simplecov'
+  # mock
+  gem 'webmock'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
+
+# fontawesome
+gem 'font-awesome-sass', '~> 5.4.0'
+
+# devise
+gem 'devise'
+gem 'devise-i18n'
+gem 'devise-security'
+
+gem 'activerecord-session_store'
+
+gem 'aws-sdk'
+
+gem 'jquery-rails'
+
+gem 'activerecord-import'
+
+gem 'aws-sdk-rails'
+
+gem 'paranoia', '~> 2.4.2'
+gem 'whenever'
+gem 'fullcalendar-rails'
+gem 'momentjs-rails'
