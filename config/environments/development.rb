@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -7,7 +5,6 @@ Rails.application.configure do
   # every request. This slows down response time but is perfect for development
   # since you don't have to restart the web server when you make code changes.
   config.cache_classes = false
-  # config.reload_classes_only_on_change = false
 
   # Do not eager load code on boot.
   config.eager_load = false
@@ -34,7 +31,7 @@ Rails.application.configure do
   config.active_storage.service = :local
 
   # Don't care if the mailer can't send.
-  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.raise_delivery_errors = false
 
   config.action_mailer.perform_caching = false
 
@@ -60,25 +57,5 @@ Rails.application.configure do
 
   # Use an evented file watcher to asynchronously detect changes in source code,
   # routes, locales, etc. This feature depends on the listen gem.
-  config.file_watcher = ActiveSupport::FileUpdateChecker
-
-  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
-
-  # mail settings
-  # config.action_mailer.delivery_method = :smtp
-  # config.action_mailer.smtp_settings = {
-  #   enable_starttls_auto: true,
-  #   address: 'smtp.gmail.com',
-  #   port: 587,
-  #   domain: 'gmail.com',
-  #   user_name: ENV['EMAIL_ADDRESS'],
-  #   password: ENV['EMAIL_PASSWORD'],
-  #   authentication: 'plain'
-  # }
-
-  config.action_mailer.delivery_method = :letter_opener_web
-
-  config.logger = Logger.new('log/development.log')
-
-  # config.action_cable.allowed_request_origins = [ 'http://localhost:3001' ]
+  config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 end
